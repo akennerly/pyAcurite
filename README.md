@@ -1,4 +1,4 @@
-## pyAcurite
+# pyAcurite
 
 A simple service that takes the data from the Acurite SmartHub (to be discontinued Summer 2018 due to Acurite being a bad and stupid company), and sends it off to Weather Underground.
 
@@ -6,12 +6,14 @@ I started setting up weewx, but it seemed like a lot of overhead for a simple th
 
 This uses the "listen" method, so you must be able to configure your router to point the DNS entry of hubapi.myacurite.com to something listening on your local network (PC or raspberry pi).  Traffic that the SmartHub sends out will now be routed to that device.
 
-This could also easily be used with the "sniffing" method - just forward the data to http://\<pyacurite-device\>/weatherstation/updateweatherstation
+This could also easily be used with the "sniffing" method - just forward the data to `http://<pyacurite-device>/weatherstation/updateweatherstation`
 
-### Configuration
+## Configuration
+
 Copy config.example.py to config.py, and in an editor set your STATION_ID and STATION_KEY.  These can be found on your Weather Underground station setting page.  Also here you can adjust the frequency to send data, and choose whether to still forward the data to Acurite's server.
 
-### Usage
+## Usage
+
 First, install the requirements:
 
 `pip install requirements.txt`
