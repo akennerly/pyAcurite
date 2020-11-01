@@ -10,6 +10,7 @@ from flask import request
 from flask import Flask
 
 app = Flask(__name__)
+
 station_data = {
     'ID': config.STATION_ID,
     'PASSWORD': config.STATION_KEY,
@@ -39,11 +40,6 @@ def send_it():
         r = requests.get(url='https://rtupdate.wunderground.com/weatherstation/updateweatherstation.php', params=station_data)
         if 'success' not in r.text:
             log_it('ERROR SENDING DATA', r.text, True)
-        if config.SEND_TO_ACURITE:
-            acurite = requests.get(url=('http://%s/weatherstation/updateweatherstation' % config.ACURITE_HUB_IP), params=raw_station_data)
-            if acurite.status_code != requests.codes.ok:
-                log_it('ERROR SENDING DATA TO ACURITE', acurite.text, True)
-
 
 @app.route('/weatherstation/updateweatherstation')
 def capture_it():
@@ -58,3 +54,6 @@ def capture_it():
     return ('', 204)
 
 send_it()
+
+if __name__ == "__main__":
+            app.run(host ='0.0.0.0', port = 5001)
