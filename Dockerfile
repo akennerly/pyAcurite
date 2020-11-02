@@ -1,6 +1,6 @@
 FROM python:3.8.6-alpine3.12
 
-MAINTAINER Andrew Kennerly "andrew@kennerly.net"
+LABEL maintainer="Andrew Kennerly <andrew@kennerly.net>"
 
 COPY ./requirements.txt /app/requirements.txt
 
