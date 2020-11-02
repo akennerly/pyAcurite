@@ -5,17 +5,17 @@ import threading
 import time
 import datetime
 import sys
-import config as config
+import os
 from flask import request
 from flask import Flask
 
 app = Flask(__name__)
 
 station_data = {
-    'ID': config.STATION_ID,
-    'PASSWORD': config.STATION_KEY,
+    'ID': os.environ['STATION_ID'],
+    'PASSWORD': os.environ['STATION_KEY'],
     'realtime': '1',
-    'rtfreq': config.FREQUENCY,
+    'rtfreq': int(os.environ['FREQUENCY']),
     'softwaretype': 'PyAcurite'
 }
 raw_station_data = {}
@@ -32,7 +32,7 @@ def log_it(title, message, err=False):
 
 
 def send_it():
-    threading.Timer(config.FREQUENCY, send_it).start()
+    threading.Timer(station_data['rtfreq'], send_it).start()
     if 'tempf' in station_data:
         pretty_data = json.dumps(station_data)
         pretty_data = pretty_data.replace(station_data['PASSWORD'], '*****')

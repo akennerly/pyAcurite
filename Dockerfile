@@ -9,7 +9,6 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 COPY main.py /app
-COPY config.py /app
 
 ENTRYPOINT [ "python" ]
 
